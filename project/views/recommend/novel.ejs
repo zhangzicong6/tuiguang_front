@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<title><%= title %></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			a {
+				text-decoration: none;
+			}
+			
+			ul,
+			ol {
+				list-style: none;
+			}
+			
+			.container {
+				padding: .32rem;
+				max-width: 740px;
+				min-width: 320px;
+				margin: 0 auto;
+				height: 10rem;
+        box-sizing: border-box;
+				overflow: hidden;
+			}
+			
+			.article-title {
+				font-size: .48rem;
+				line-height: .48rem;
+			}
+			
+			.article-title p {
+				white-space: pre-wrap;
+				word-break: break-all;
+			}
+			
+			.date {
+				line-height: 1rem;
+				font-size: .3rem;
+			}
+			
+			.date span {
+				color: #ACACAC;
+				margin: 0 .33rem 0 0;
+			}
+			
+			.date a {
+				color: #607FA6;
+				text-decoration: none;
+				display: inline-block;
+			}
+			
+			.xiangg {
+			    border: 1px solid #EBEBEB;
+			    border-bottom: none;
+			}
+			
+			.xiangg a {
+			    display: block;
+			    border-bottom: 1px solid #EBEBEB;
+			    color: #10B0F3;
+			    white-space: nowrap;
+			    text-decoration: none;
+			    line-height: .7rem;
+			    width: 100%;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			    font-size: .3rem;
+			}
+			
+			.xiangg a em {
+			    font-size: .6rem;
+			    vertical-align: -.1rem;
+			    margin: 0 .2rem;
+			    color: #868686;
+			}
+
+			.ooxx {
+				display: block;
+				margin: 23px auto 0;
+				width: 100%;
+			}
+			
+			.chapter {
+				padding: .8rem .2rem 0;
+				margin: 0 auto;
+				font-size: 16px;
+			}
+			
+			.chapter p {
+				margin-top: .5rem;
+				line-height: .6rem;
+				text-indent: 2em;
+			}
+			
+			.continue-read {
+				background: url(http://douzhuan.oss-cn-qingdao.aliyuncs.com/jscss/dfcssimg/hide_content_bg.png) repeat-x 0 0;
+				width: 100%;
+				height: 2rem;
+				margin: -1.6rem 0 -.3rem;
+				z-index: 1;
+				position: relative;
+				text-align: center;
+			}
+			
+			.continue-read a {
+				margin-top: .8rem;
+				color: #fff;
+				display: inline-block;
+				width: 70%;
+				line-height: 280%;
+				background-color: #fe7d39;
+				border-radius: 1rem;
+				text-align: center;
+				text-decoration: none;
+        font-size: .3rem
+			}
+			
+			.other-see {
+				height: 1rem;
+				line-height: 1rem;
+				color: #fe7d39;
+				margin: .3rem;
+				margin-bottom: 0;
+				border-top: 1px solid #eee;
+				border-bottom: 2px solid #eee;
+        font-size: .36rem
+			}
+			
+			/*小说列表*/
+			
+			.fl {
+				float: left;
+				display: inline-block;
+			}
+			
+			.fr {
+				float: right;
+				display: inline-block;
+			}
+			
+			.clearfix:after {
+				height: 0;
+				content: " ";
+				display: block;
+				visibility: hidden;
+				font-size: 0;
+				clear: both;
+			}
+
+      .content-list {
+				padding-bottom: .3rem;
+      }
+			
+			.content-list li {
+				margin: 0 .26rem;
+				padding: .3rem 0 .24rem;
+				border-bottom: 1px solid #EFEFEF;
+				cursor: pointer;
+			}
+			
+			.content-link {}
+			
+			.content-img {
+				width: 32%
+			}
+			
+			.content-img img {
+				background: no-repeat 100% 100%;
+				background-size: cover;
+				width: 100%;
+				height: 1.4rem;
+				cursor: pointer;
+				display: block;
+			}
+			
+			.content-inner {
+				color: #555555;
+				padding: .2rem .2rem 0 0;
+				width: 66%;
+        box-sizing: border-box;
+			}
+			
+			.content-inner .content-title {
+				font-size: .36rem;
+				font-weight: 600;
+				width: 100%;
+				color: #333;
+				line-height: .5rem;
+				height: .8rem;
+				margin: -.1rem 0 .1rem .1rem;
+			}
+			
+			.content-subtitle {
+				color: #A6A6A6;
+				font-size: .2rem;
+				margin: .1rem 0 0 .1rem;
+			}
+			
+			.content-subtitle span {
+				margin: .1rem .2rem 0 0;
+				font-size: .2rem;
+			}
+			
+			.content-subtitle span.hot {
+				border: 1px solid #fe7d39;
+				color: #fe7d39;
+				border-radius: 2px;
+				margin-left: -3px;
+				padding: 0 2px;
+			}
+			
+			.content-subtitle span em {
+				font-style: normal;
+			}
+			/*小说列表*/
+    </style>
+    <script type="text/javascript">
+          (function(doc, win) {
+            var docEl = doc.documentElement,
+              resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+              recalc = function() {
+                var clientWidth = docEl.clientWidth;
+                if(!clientWidth) return;
+                if(clientWidth >= 640) {
+                  docEl.style.fontSize = '100px';
+                } else {
+                  docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                }
+              };
+  
+            if(!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+          })(document, window);
+    </script>
+	</head>
+
+	<body>
+		<div id="content">
+			<div class="container">
+				<div class="article-title">
+					<%= title %>
+				</div>
+				<div class="date clearfix" style="position: relative;">
+					<span>
+						<%= date %>
+					</span>
+					<a href="<%= linkUrl %>" id="advText">我要抽大奖</a>
+					<img class="dong" src="/tuijian/click_me.gif" style="position:absolute;width: 1.8rem;top: .3rem;left: 3.8rem;">
+				</div>
+				
+				
+				<div class="xiangg" id="xiangtop"></div>
+				
+				
+				<img class="ooxx" src="<%= bannerUrl %>">
+				
+				<div class="chapter">
+					<%- capter %>
+				</div>
+				
+				<div style="width: 100%;margin: 20px auto 10px;position: relative;">
+					<img src="<%= qrcode %>" style="width: 100% ;">
+				</div>
+			</div>
+			<div class="continue-read">
+				<a href="javascript:;">点击继续阅读全文</a>
+			</div>
+			<div class="other-see">他们正在看...</div>
+			
+			<ul class="content-list" id="content-list"></ul>
+		</div>
+		<div style="display:none" data-author="mingxingshuo">
+			<%- statisticsCode %>
+		</div>
+	</body>
+	<script src="/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<%= otherCode %>" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+		$(function() {
+			$('.continue-read').click(function() {
+				$('.container').css({
+					'overflow': 'inherit',
+					'height': 'auto'
+				})
+				$('.continue-read').css('display', 'none')
+			})
+			$.ajax({
+				type: "get",
+				url: "/recommend/get_list?id=<%= id %>",
+				async: true,
+				success: function(res) {
+          let data = res.data, html = '', domain = res.domain_name;
+					$.each(data, function(i, el) {
+						html += `
+							<li class="clearfix content-link" content_href="${domain}/recommend/novel/${el._id}">
+								<div class="content-img fr">
+									<img src="${el.bannerUrl}" alt="" />
+								</div>
+								<div class="content-inner fl">
+									<div class="content-title">${el.title}</div>
+									<div class="content-subtitle">
+										<span>${el.reading}阅读</span>
+									</div>
+								</div>
+							</li>
+						`;
+						$('#content-list').append(html)
+          });
+          let arr = getArrayItems(data, 2), cont = '';
+          $.each(arr, (i, el) => {
+            cont += `
+              <a href="${domain}/recommend/novel/${el._id}"><em>·</em>推荐：<span>${el.title}</span></a>
+            `;
+            $("#xiangtop").append(cont)
+          })
+          hrefs(data, domain)
+				},
+				error: function(err) {
+					console.log(err)
+				}
+			});
+			$('#content-list').on('click', 'li.content-link', function() {
+				window.location.href = $(this).attr('content_href');
+      })
+      function hrefs(arr, domain) {
+        window.history.pushState('forward', null, null);
+        if(window.history && window.history.pushState) {
+          window.onpopstate = async function() {
+            $.ajax({
+              type: 'get',
+              url: '/recommend/back/novel/' + arr[0].id,
+              async: true,
+              success: (res) => {
+                location.href = domain + '/recommend/novel/' + res.id
+              },
+              error: (err) => {
+                console.log(err)
+              }
+            })
+          }
+        };
+      }
+      function getArrayItems(arr, num) {
+          var temp_array = new Array();
+          for (var index in arr) {
+              temp_array.push(arr[index]);
+          }
+          var return_array = new Array();
+          for (var i = 0; i<num; i++) {
+              if (temp_array.length>0) {
+                  var arrIndex = Math.floor(Math.random()*temp_array.length);
+                  return_array[i] = temp_array[arrIndex];
+                  temp_array.splice(arrIndex, 1);
+              } else {
+                  break;
+              }
+          }
+          return return_array;
+      }
+
+		})
+	</script>
+
+</html>
