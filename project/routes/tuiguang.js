@@ -36,8 +36,9 @@ router.get('/token', async (req, res, next) => {
 
 
 router.get('/d/:index', async (req, res, next) => {
+  console.log('-----访问-----',req.params.index)
   let value = await mem.get('data_' + req.params.index);
-  
+  console.log('-----mem----',value)
   let ip = req.clientIp;
   let ua = req.headers['user-agent'];
   //let h_ua = ua.substring(0,ua.indexOf(')',ua.indexOf(')')+1)+1);
@@ -64,6 +65,7 @@ router.get('/d/:index', async (req, res, next) => {
     res.render('tuiguang/data', res_data);
   } else {
     let data = await TuiGuangModel.find({id: req.params.index});
+    console.log('-----data----',data)
     if (data.length > 0) {
       let res_data = {
         pageTitle: data[0].pageTitle,
