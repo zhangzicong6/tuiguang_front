@@ -65,7 +65,7 @@ router.get('/d/:index', async (req, res, next) => {
     res.render('tuiguang/data', res_data);
   } else {
     let data = await TuiGuangModel.find({id: req.params.index});
-    console.log('-----data----',data)
+    //console.log('-----data----',data)
     if (data.length > 0) {
       let res_data = {
         pageTitle: data[0].pageTitle,
